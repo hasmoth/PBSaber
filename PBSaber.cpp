@@ -891,13 +891,14 @@ void PBSaber::handleButtonsEvents()
 		return;
 	}
 
+    //TODO: there needs to be a case if onoffButton and fxButton share the same pin
 	if (fxButton)
 	{
 		// Saber has FX button
 
 		// Check NEXT PROFILE sequence
 		// (On/Off button pressed event + an already pressed FX button)
-		if (event == ButtonPressed && fxButton->pressed() && config.settings.profile_count > 1)
+		if (event == ButtonShortPressAndRelease && fxButton->pressed() && config.settings.profile_count > 1)
 		{
 			enterState(stateNextProfile);
 			return;
@@ -922,7 +923,7 @@ void PBSaber::handleButtonsEvents()
 
 		// Check PREV PROFILE sequence
 		// (FX button pressed with an already pressed On/Off button)
-		if (event == ButtonPressed && onButton->pressed() && config.settings.profile_count > 1)
+		if (event == ButtonShortPressAndRelease && onButton->pressed() && config.settings.profile_count > 1)
 		{
 			enterState(statePrevProfile);
 			return;

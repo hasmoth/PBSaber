@@ -28,47 +28,39 @@
 
 #include <Arduino.h>
 
-class TimeCounter
-{
+class TimeCounter {
 public:
-	TimeCounter() : counting(false), initial_ticks(0), mark(0) {}
+    TimeCounter()
+        : counting(false)
+        , initial_ticks(0)
+        , mark(0)
+    {
+    }
 
-	inline void startCounter()
-	{
-		initial_ticks = GetTickCount();
-		counting = true;
-	}
+    inline void startCounter()
+    {
+        initial_ticks = GetTickCount();
+        counting = true;
+    }
 
-	inline void stopCounter()
-	{
-		counting = false;
-	}
+    inline void stopCounter() { counting = false; }
 
-	inline bool active()
-	{
-		return counting;
-	}
+    inline bool active() { return counting; }
 
-	inline void startTimeoutCounter(uint32_t timeout)
-	{
-		mark = timeout;
-		startCounter();
-	}
+    inline void startTimeoutCounter(uint32_t timeout)
+    {
+        mark = timeout;
+        startCounter();
+    }
 
-	inline uint32_t elapsed()
-	{
-		return (GetTickCount() - initial_ticks);
-	}
+    inline uint32_t elapsed() { return (GetTickCount() - initial_ticks); }
 
-	inline bool timeout()
-	{
-		return elapsed() >= mark;
-	}
+    inline bool timeout() { return elapsed() >= mark; }
 
 private:
-	bool counting;
-	uint32_t initial_ticks;
-	uint32_t mark;
+    bool counting;
+    uint32_t initial_ticks;
+    uint32_t mark;
 };
 
 #endif /* __TIMECOUNTER_H__ */

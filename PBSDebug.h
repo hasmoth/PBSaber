@@ -35,27 +35,26 @@
 
 #if PBS_DEBUG
 
-#define DEBUG_CONTEXT(x)	x
+#define DEBUG_CONTEXT(x) x
 
 #ifndef PBS_DEBUG_SERIAL
-#define PBS_DEBUG_SERIAL	Serial
+#define PBS_DEBUG_SERIAL Serial
 #endif
 
 #ifndef PBS_DEBUG_LEVEL_MASK
-#define PBS_DEBUG_LEVEL_MASK	DebugInfoAll
+#define PBS_DEBUG_LEVEL_MASK DebugInfoAll
 #endif
 
 void initDebug();
 void debugPrint(uint32_t level, const char* fmt, ...);
 void debugOut(char* str, bool crlf);
 
-#define debugMsg(level, fmt, ...)						\
-do {													\
-	if (level && (level & PBS_DEBUG_LEVEL_MASK))	\
-	{													\
-		debugPrint(level, fmt, ##__VA_ARGS__);			\
-	}													\
-} while(0)
+#define debugMsg(level, fmt, ...)                                              \
+    do {                                                                       \
+        if (level && (level & PBS_DEBUG_LEVEL_MASK)) {                         \
+            debugPrint(level, fmt, ##__VA_ARGS__);                             \
+        }                                                                      \
+    } while (0)
 
 #else
 #define DEBUG_CONTEXT(x)
@@ -65,9 +64,9 @@ do {													\
 #define debugMsg(level, fmt, ...) (void)(0)
 #endif /* PBS_DEBUG */
 
-#define DebugError		0x01
-#define DebugWarning	0x02
-#define DebugInfo		0x04
-#define DebugInfoAll	(DebugError | DebugWarning | DebugInfo)
+#define DebugError 0x01
+#define DebugWarning 0x02
+#define DebugInfo 0x04
+#define DebugInfoAll (DebugError | DebugWarning | DebugInfo)
 
 #endif /* __PBSDEBUG_H__ */

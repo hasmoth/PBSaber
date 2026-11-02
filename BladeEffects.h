@@ -30,54 +30,49 @@
 
 // Common effects for both LEDs strip and HBLEDs
 
-typedef struct
-{
-	bool active;
-	COLOR end;
-	float rgbw_rate[4];
-	float rgbw_value[4];
-	uint32_t ticks;
+typedef struct {
+    bool active;
+    COLOR end;
+    float rgbw_rate[4];
+    float rgbw_value[4];
+    uint32_t ticks;
 } changeShimmerEffect;
 
-typedef struct
-{
-	bool active;
-	COLOR color;
-	uint32_t ticks;
-	float blend;
+typedef struct {
+    bool active;
+    COLOR color;
+    uint32_t ticks;
+    float blend;
 } staticEffect;
 
-typedef struct
-{
-	bool active;
-	COLOR color;
-	float value;
-	uint8_t lower_limit;
-	float step;
-	bool random;
-	uint8_t blend;
-	uint32_t ticks;
+typedef struct {
+    bool active;
+    COLOR color;
+    float value;
+    uint8_t lower_limit;
+    float step;
+    bool random;
+    uint8_t blend;
+    uint32_t ticks;
 } shimmerEffect;
 
-typedef struct
-{
-	bool active;
-	bool flicker;
-	COLOR color;
-	float blend;
-	COLOR current_color;
-	uint32_t ticks;
-	uint32_t tick_count;
-	uint32_t duration;
-	bool toggle;
+typedef struct {
+    bool active;
+    bool flicker;
+    COLOR color;
+    float blend;
+    COLOR current_color;
+    uint32_t ticks;
+    uint32_t tick_count;
+    uint32_t duration;
+    bool toggle;
 } flashEffect;
 
-typedef struct
-{
-	bool active;
-	float rate;
-	float value;
-	float end;
+typedef struct {
+    bool active;
+    float rate;
+    float value;
+    float end;
 } fadeEffect;
 
 #endif /* __BLADEEFFECT_H__ */

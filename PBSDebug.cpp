@@ -32,39 +32,36 @@ static char debug_string[255];
 
 void debugOut(char* str, bool crlf)
 {
-	if (crlf)
-		PBS_DEBUG_SERIAL.println(str);
-	else
-		PBS_DEBUG_SERIAL.print(str);
+    if (crlf)
+        PBS_DEBUG_SERIAL.println(str);
+    else
+        PBS_DEBUG_SERIAL.print(str);
 }
 
 void debugPrint(uint32_t level, const char* fmt, ...)
 {
-	uint32_t timestamp = GetTickCount();
+    uint32_t timestamp = GetTickCount();
 
-	sprintf(debug_string, "[ %08lu ] ", timestamp);
-	debugOut(debug_string, false);
+    sprintf(debug_string, "[ %08lu ] ", timestamp);
+    debugOut(debug_string, false);
 
-	if (level & DebugError)
-		sprintf(debug_string, "(%s) ", "ERROR");
-	else if (level & DebugWarning)
-		sprintf(debug_string, "(%s) ", "WARNING");
-	else
-		sprintf(debug_string, "(%s) ", "INFO");
+    if (level & DebugError)
+        sprintf(debug_string, "(%s) ", "ERROR");
+    else if (level & DebugWarning)
+        sprintf(debug_string, "(%s) ", "WARNING");
+    else
+        sprintf(debug_string, "(%s) ", "INFO");
 
-	debugOut(debug_string, false);
+    debugOut(debug_string, false);
 
-	va_list argptr;
-	va_start(argptr, fmt);
-	vsprintf(debug_string, fmt, argptr);
-	va_end(argptr);
+    va_list argptr;
+    va_start(argptr, fmt);
+    vsprintf(debug_string, fmt, argptr);
+    va_end(argptr);
 
-	debugOut(debug_string, true);
+    debugOut(debug_string, true);
 }
 
-void initDebug()
-{
-	PBS_DEBUG_SERIAL.begin(115200);
-}
+void initDebug() { PBS_DEBUG_SERIAL.begin(115200); }
 
 #endif // PBS_DEBUG

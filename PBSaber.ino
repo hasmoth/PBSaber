@@ -27,12 +27,6 @@
 
 PBSaber saber;
 
-void setup()
-{
-	saber.begin();
-}
+void setup() { saber.begin(); }
 
-void loop()
-{
-	saber.loop();
-}
+void loop() { saber.loop(); }

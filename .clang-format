@@ -1,0 +1,9 @@
+# clang-format
+Language: Cpp
+BasedOnStyle: WebKit
+ColumnLimit: 80
+AllowShortCaseLabelsOnASingleLine: true
+AlignConsecutiveShortCaseStatements:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false

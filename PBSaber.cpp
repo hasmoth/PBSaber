@@ -214,12 +214,22 @@ bool PBSaber::initializeHardware()
 
     // The FX button is optional
     if (config.hw.has_button_fx) {
-        config.hw.button_fx.button.begin(config.hw.button_fx.pin,
-            config.hw.button_fx.active_high ? ButtonActiveHigh
-                                            : ButtonActiveLow,
-            config.settings.button_debounce);
+        // Are On/Off button and FX button the same button
+        if (config.hw.button_fx.pin == config.hw.button_onoff.pin) {
+            config.hw.button_fx.button.begin(config.hw.button_onoff.pin,
+                config.hw.button_onoff.active_high ? ButtonActiveHigh
+                                                   : ButtonActiveLow,
+                config.settings.button_debounce);
+            single_button_config = true;
+        } else {
+            config.hw.button_fx.button.begin(config.hw.button_fx.pin,
+                config.hw.button_fx.active_high ? ButtonActiveHigh
+                                                : ButtonActiveLow,
+                config.settings.button_debounce);
 
-        config.hw.button_fx.button.setLongPressTime(config.settings.lock_time);
+            config.hw.button_fx.button.setLongPressTime(
+                config.settings.lock_time);
+        }
     }
 
     // Initialize blade
@@ -718,7 +728,7 @@ void PBSaber::pollStateIdleOff()
     if (ignitionOnStab())
         enterState(stateIgnition);
 
-    if (fxButton) {
+    if (fxButton && !single_button_config) {
         // Saber has an FX button
         event = fxButton->getEvent();
 
@@ -855,10 +865,8 @@ void PBSaber::handleButtonsEvents()
         return;
     }
 
-    // TODO: there needs to be a case if onoffButton and fxButton share the same
-    // pin
-    if (fxButton) {
-        // Saber has FX button
+    if (fxButton && !single_button_config) {
+        // Saber has a dedicated FX button
 
         // Check NEXT PROFILE sequence
         // (On/Off button pressed event + an already pressed FX button)

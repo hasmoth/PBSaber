@@ -157,6 +157,8 @@ private:
     PBSConfig config;
     PBSBladeBase* blade;
 
+    bool single_button_config;
+
     saberProfile current_profile;
     saberProfile tmp_profile;
     saberStateId prev_state;
